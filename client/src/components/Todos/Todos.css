@@ -1,0 +1,143 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #131e69;
+  line-height: 1.6;
+}
+
+/* Container principal */
+.todos-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Cabeçalho */
+h1 {
+  font-size: 2rem;
+  color: #3a3cb6;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Formulário de entrada */
+.form {
+  display: flex;
+  flex-direction: column; /* Organiza os elementos em coluna */
+  gap: 15px; /* Adiciona espaçamento entre os campos */
+  margin-bottom: 20px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #a9a9e3;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.add-button {
+  background-color: #a41416;
+  color: #f4f4f4;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: #131e69;
+}
+
+/* Lista de tarefas */
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-item {
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #f4f4f4;
+  border: 1px solid #a9a9e3;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.todo-item:hover {
+  background-color: #e6e6fa;
+}
+
+.todo-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.todo-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.todo-status {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Tarefas concluídas */
+.completed {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.completed .todo-status {
+  color: #155724;
+}
+
+/* Transição para mudanças de estado */
+.todo-details {
+  cursor: pointer;
+}
+
+.todo-status {
+  font-size: 14px;
+  font-weight: bold;
+  color: #888;
+}
+
+.todo-item.completed .todo-title {
+  text-decoration: line-through;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .form {
+    flex-direction: column;
+    align-items: stretch; /* Garante que os elementos ocupem a largura total */
+  }
+
+  .input-field {
+    width: 100%;
+  }
+
+  .add-button {
+    width: 100%;
+  }
+}

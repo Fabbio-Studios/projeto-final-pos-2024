@@ -1,0 +1,124 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #131e69;
+  line-height: 1.6;
+}
+
+/* Container principal */
+.users-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Cabeçalho */
+h1 {
+  font-size: 2rem;
+  color: #3a3cb6;
+  margin-bottom: 20px;
+}
+
+/* Formulário de entrada */
+.form {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaçamento entre os campos */
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #a9a9e3;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: all 0.15s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #3a3cb6;
+  box-shadow: 0 0 5px rgba(58, 60, 182, 0.5);
+}
+
+.add-button {
+  background-color: #a41416;
+  color: #f4f4f4;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.add-button:hover {
+  background-color: #131e69;
+}
+
+/* Lista de usuários */
+.user-list {
+  list-style: none;
+  padding: 0;
+}
+
+.user-item {
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #f4f4f4;
+  border: 1px solid #a9a9e3;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.user-item:hover {
+  background-color: #e6e6fa;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.user-email {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Botão de deletar */
+.delete-button {
+  background-color: #e74c3c;
+  color: #ffffff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
+
