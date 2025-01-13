@@ -2,4 +2,4 @@
 Projeto Final da disciplina de POS <br>
 Dupla:<br>
 Fábio Gutemberg Oliveira da Silva<br>
-Luiz Guilherme
+Luiz Guilherme de Araújo Moura
