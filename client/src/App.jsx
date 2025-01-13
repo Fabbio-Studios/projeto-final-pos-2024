@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import Users from './components/Users/Users';
+import CreateUser from './components/Users/CreateUser';
+import UpdateUser from './components/Users/UpdateUser';
 import ToDos from './components/Todos/ToDos';
 import Albums from './components/Album/Albums';
 import Photos from './components/Photos/Photos';
@@ -59,6 +61,8 @@ const App = () => {
       <div>
         <Routes>
           <Route path="/users" element={<Users users={users} />} />
+          <Route path="/create-user" element={<CreateUser onAddUser={(newUser) => setUsers((prevUsers) => [...prevUsers, newUser])} />} />
+          <Route path="/update-user/:userId" element={<UpdateUser />} />
           <Route path="/todos" element={<ToDos todos={todos} />} />
           <Route path="/albums" element={<Albums albums={albums} />} />
           <Route path="/photos" element={<Photos photos={photos} />} />

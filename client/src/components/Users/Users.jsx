@@ -8,12 +8,14 @@ const Users = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // Função para buscar usuários da API
   useEffect(() => {
     fetchUsers();
   }, []);
 
   const fetchUsers = async () => {
     setLoading(true);
+    setError(''); // Resetando o erro ao tentar buscar novamente
     try {
       const response = await axios.get('http://localhost:8000/api/users/');
       setUsers(response.data);
@@ -31,6 +33,7 @@ const Users = () => {
 
     try {
       await axios.delete(`http://localhost:8000/api/users/${id}/`);
+      // Atualizando a lista de usuários após a remoção
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
     } catch (error) {
       alert('Erro ao deletar usuário. Tente novamente.');
@@ -38,18 +41,26 @@ const Users = () => {
     }
   };
 
+  const handleAddUser = (newUser) => {
+    setUsers((prevUsers) => [...prevUsers, newUser]);
+  };
+
   return (
     <div className="users-container">
       <h1>Gerenciamento de Usuários</h1>
 
-      {error && <p className="error-message">{error}</p>}
+      {error && (
+        <div className="error-message">
+          <p>{error}</p>
+          <button onClick={fetchUsers}>Tentar Novamente</button>
+        </div>
+      )}
 
-      {/* Link para criar um novo usuário */}
+      {loading && <p className="loading-message">Carregando usuários...</p>}
+
       <Link to="/create-user">
-        <button>Criar Novo Usuário</button>
+        <button className="create-user-button">Criar Novo Usuário</button>
       </Link>
-
-      {loading && <p>Carregando usuários...</p>}
 
       <ul className="user-list">
         {users.map((user) => (
@@ -58,7 +69,13 @@ const Users = () => {
               <span className="user-name">{user.name}</span>
               <span className="user-email">{user.email}</span>
             </div>
-            <button onClick={() => handleDeleteUser(user.id)} className="delete-button">
+            <Link to={`/update-user/${user.id}`}>
+              <button className="update-button">Atualizar</button>
+            </Link>
+            <button
+              onClick={() => handleDeleteUser(user.id)}
+              className="delete-button"
+            >
               Deletar
             </button>
           </li>

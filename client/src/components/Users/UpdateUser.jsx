@@ -1,53 +1,70 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
-const UpdateUser = ({ userId }) => {
+const UpdateUser = () => {
+  const { userId } = useParams();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    fetch(`https://example.com/api/users/${userId}/`)
-      .then((response) => response.json())
-      .then((data) => {
-        setName(data.name);
-        setEmail(data.email);
+    axios.get(`http://localhost:8000/api/users/${userId}/`)
+      .then((response) => {
+        setName(response.data.name);
+        setEmail(response.data.email);
       })
       .catch((error) => console.error('Error fetching user for update:', error));
   }, [userId]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const updatedUser = { name, email };
 
-    fetch(`https://example.com/api/users/${userId}/`, {
-      method: 'PUT',
-      body: JSON.stringify(updatedUser),
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then((response) => response.json())
-      .then((user) => {
-        setName(user.name);
-        setEmail(user.email);
-      })
-      .catch((error) => console.error('Error updating user:', error));
+    try {
+      const response = await axios.put(`http://localhost:8000/api/users/${userId}/`, updatedUser);
+      setSuccess(true);
+      setName(response.data.name);
+      setEmail(response.data.email);
+    } catch (error) {
+      setError('Erro ao atualizar usuário. Tente novamente.');
+      console.error('Error updating user:', error);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <button type="submit">Update User</button>
-    </form>
+    <div className="update-user-container">
+      <h1>Atualizar Usuário</h1>
+
+      {success && <p>Usuário atualizado com sucesso!</p>}
+      {error && <p className="error-message">{error}</p>}
+
+      <form onSubmit={handleSubmit}>
+        <label>
+          Nome:
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </label>
+
+        <label>
+          Email:
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </label>
+
+        <button type="submit">Atualizar Usuário</button>
+      </form>
+    </div>
   );
 };
 
